@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 640239470}
   - component: {fileID: 640239471}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: OrientationHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1965663587}
   - component: {fileID: 1246237458}
   - component: {fileID: 1507034010540789706}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
