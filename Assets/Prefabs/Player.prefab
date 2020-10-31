@@ -266,3 +266,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashParticleSystemPrefab: {fileID: 3316666422085722376, guid: 9b2b2d9a58db75c4c9fd7c42094f27ff,
     type: 3}
+  jumpSFX: {fileID: 8300000, guid: c1d8e22e7545a884ba2ac0df0e010953, type: 3}
