@@ -119,7 +119,7 @@ public class PlayerController2D : MonoBehaviour
         if (groundCheck && !this.IsDashing && inputManager.Dash())
         {
             this.IsDashing = true;
-            this.feedbackManager.StartFeedbackActionOf(FeedbackManager.CharacterAction.DASH, dashDuration);
+            this.feedbackManager.StartFeedbackActionOf(FeedbackManager.CharacterAction.DASH, dashDuration, (int) this.orientation);
         }
 
         if (this.IsDashing)
@@ -163,6 +163,7 @@ public class PlayerController2D : MonoBehaviour
             if (this.inputManager.JumpPressed())
             {
                 this.velocity.y = Mathf.Sqrt(2 * this.jumpHeight * Mathf.Abs(this.gravity));
+                this.feedbackManager.StartFeedbackActionOf(FeedbackManager.CharacterAction.JUMP, 0f);
             }
         }
         
