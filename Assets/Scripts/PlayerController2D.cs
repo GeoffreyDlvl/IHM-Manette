@@ -237,7 +237,6 @@ public class PlayerController2D : MonoBehaviour
             else if (IsCollidingWithWall(colliderDistance))
             {
                 ApplyWallDrag();
-                this.velocity.x = 0; // hiting a wall stops the caracter immediatly and in any of below cases
                 if (IsDashing)
                 {
                     this.IsDashing = false;
