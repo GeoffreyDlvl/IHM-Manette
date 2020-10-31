@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class FeedbackManager : MonoBehaviour
@@ -33,7 +32,7 @@ public class FeedbackManager : MonoBehaviour
         dashParticleSystem.transform.parent = transform;
     }
 
-    public void StartFeedbackActionOf(CharacterAction action, float duration)
+    public void StartFeedbackActionOf(CharacterAction action, float duration, int particlEmissionDirection)
     {
         switch(action)
         {
@@ -42,6 +41,8 @@ public class FeedbackManager : MonoBehaviour
                 {
                     var mainModule = dashParticleSystem.main;
                     mainModule.duration = duration;
+                    var shapeModule = dashParticleSystem.shape;
+                    shapeModule.rotation = new Vector3(0,0, particlEmissionDirection == 1 ? 270 : 90);
                     dashParticleSystem.Play();
                 }                    
                 break;
