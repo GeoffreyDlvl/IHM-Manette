@@ -23,16 +23,18 @@ public class FeedbackManager : MonoBehaviour
     #endregion
 
     AudioSource cameraAudioSource;
+    PlayerController2D playerController;
 
     private void Awake()
     {
         cameraAudioSource = Camera.main.GetComponent<AudioSource>();
+        playerController = GetComponent<PlayerController2D>();
 
         dashParticleSystem = Instantiate(dashParticleSystemPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1), Quaternion.identity);
         dashParticleSystem.transform.parent = transform;
     }
 
-    public void StartFeedbackActionOf(CharacterAction action, float duration, int particlEmissionDirection)
+    public void PlayFeedback(CharacterAction action)
     {
         switch(action)
         {
@@ -40,9 +42,9 @@ public class FeedbackManager : MonoBehaviour
                 if (!dashParticleSystem.isPlaying)
                 {
                     var mainModule = dashParticleSystem.main;
-                    mainModule.duration = duration;
+                    mainModule.duration = playerController.GetDashDuration();
                     var shapeModule = dashParticleSystem.shape;
-                    shapeModule.rotation = new Vector3(0,0, particlEmissionDirection == 1 ? 270 : 90);
+                    shapeModule.rotation = new Vector3(0, 0, (int) playerController.orientation == 1 ? 270 : 90);
                     dashParticleSystem.Play();
                 }                    
                 break;
