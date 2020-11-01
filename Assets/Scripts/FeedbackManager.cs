@@ -14,8 +14,8 @@ public class FeedbackManager : MonoBehaviour
 
     #region Particles
     [SerializeField]
-    private ParticleSystem dashParticleSystemPrefab;
-    private ParticleSystem dashParticleSystem;
+    ParticleSystem dashParticles;
+    //private ParticleSystem dashParticleSystem;
 
     [SerializeField]
     ParticleSystem dustParticles;
@@ -34,8 +34,8 @@ public class FeedbackManager : MonoBehaviour
         cameraAudioSource = Camera.main.GetComponent<AudioSource>();
         playerController = GetComponent<PlayerController2D>();
 
-        dashParticleSystem = Instantiate(dashParticleSystemPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1), Quaternion.identity);
-        dashParticleSystem.transform.parent = transform;
+        ParticleSystem.MainModule dashMainModule = dashParticles.main;
+        dashMainModule.duration = playerController.GetDashDuration();
     }
 
     public void PlayFeedback(CharacterAction action)
@@ -43,14 +43,7 @@ public class FeedbackManager : MonoBehaviour
         switch(action)
         {
             case CharacterAction.DASH:
-                if (!dashParticleSystem.isPlaying)
-                {
-                    var mainModule = dashParticleSystem.main;
-                    mainModule.duration = playerController.GetDashDuration();
-                    var shapeModule = dashParticleSystem.shape;
-                    shapeModule.rotation = new Vector3(0, 0, (int) playerController.orientation == 1 ? 270 : 90);
-                    dashParticleSystem.Play();
-                }                    
+                CreateDashEffect();                
                 break;
             case CharacterAction.JUMP:
                 cameraAudioSource.clip = jumpSFX;
@@ -63,6 +56,19 @@ public class FeedbackManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void CreateDashEffect()
+    {
+        ParticleSystem.VelocityOverLifetimeModule velocityModule = dashParticles.velocityOverLifetime;
+        velocityModule.x = (-1) * (int)playerController.orientation * 5;
+        dashParticles.Play();
+        dustParticles.Play();
+    }
+
+    private void Update()
+    {
+        var velocityOverLifetime = dashParticles.velocityOverLifetime;
     }
 
     private void CreateDust()
