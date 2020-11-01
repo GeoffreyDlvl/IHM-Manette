@@ -31,8 +31,9 @@ public class FeedbackManager : MonoBehaviour
 
     private void Awake()
     {
-        cameraAudioSource = Camera.main.GetComponent<AudioSource>();
         playerController = GetComponent<PlayerController2D>();
+
+        cameraAudioSource = Camera.main.GetComponent<AudioSource>();
 
         ParticleSystem.MainModule dashMainModule = dashParticles.main;
         dashMainModule.duration = playerController.GetDashDuration();
@@ -46,9 +47,7 @@ public class FeedbackManager : MonoBehaviour
                 CreateDashEffect();                
                 break;
             case CharacterAction.JUMP:
-                cameraAudioSource.clip = jumpSFX;
-                cameraAudioSource.volume = .3f;
-                cameraAudioSource.Play();
+                CreateJumpEffect();
                 break;
             case CharacterAction.FLIP:
                 CreateDust();
@@ -58,17 +57,21 @@ public class FeedbackManager : MonoBehaviour
         }
     }
 
+    private void CreateJumpEffect()
+    {
+        cameraAudioSource.clip = jumpSFX;
+        cameraAudioSource.volume = .3f;
+        cameraAudioSource.Play();
+
+        CreateDust();
+    }
+
     private void CreateDashEffect()
     {
         ParticleSystem.VelocityOverLifetimeModule velocityModule = dashParticles.velocityOverLifetime;
         velocityModule.x = (-1) * (int)playerController.orientation * 5;
         dashParticles.Play();
-        dustParticles.Play();
-    }
-
-    private void Update()
-    {
-        var velocityOverLifetime = dashParticles.velocityOverLifetime;
+        CreateDust();
     }
 
     private void CreateDust()
