@@ -163,7 +163,7 @@ public class PlayerController2D : MonoBehaviour
             if (this.inputManager.JumpPressed())
             {
                 this.velocity.y = Mathf.Sqrt(2 * this.jumpHeight * Mathf.Abs(this.gravity));
-                this.feedbackManager.StartFeedbackActionOf(FeedbackManager.CharacterAction.JUMP, 0f);
+                this.feedbackManager.StartFeedbackActionOf(FeedbackManager.CharacterAction.JUMP, 0f,0);
             }
         }
         
@@ -238,7 +238,7 @@ public class PlayerController2D : MonoBehaviour
             else if (IsCollidingWithWall(colliderDistance))
             {
                 ApplyWallDrag();
-                if (IsDashing)
+                if (this.IsDashing)
                 {
                     this.IsDashing = false;
                 }
@@ -251,7 +251,7 @@ public class PlayerController2D : MonoBehaviour
                     this.wallJumpCount++;
                     ComputeWallJumpVelocity();
                 }
-            }
+            } 
         }
     }
 
@@ -324,7 +324,6 @@ public class PlayerController2D : MonoBehaviour
         yield return new WaitForSeconds(this.dashDuration);
         IsDashing = false;
     }
-
 #region Unity
     void Awake()
     {
