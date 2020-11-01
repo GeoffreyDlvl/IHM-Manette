@@ -21,8 +21,8 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField, Tooltip("Dash speed in u/s.")]
     float dashSpeed = 30f;
 
-    [SerializeField]
-    bool dashJumpingAllowed = true;
+    [SerializeField, Tooltip("Make jumping mid-air possible.")]
+    bool allowDashJumping = true;
 
     [SerializeField, Tooltip("Grounded acceleration when the player moves.")]
     float groundAcceleration = 50f;
@@ -77,6 +77,8 @@ public class PlayerController2D : MonoBehaviour
             }
         }
     }
+
+    private bool canDash;
     private bool IsSprinting
     {
         get { return inputManager.Sprint(); }
@@ -119,8 +121,8 @@ public class PlayerController2D : MonoBehaviour
 
         float speed = IsSprinting ? this.sprintingSpeed : this.walkingSpeed;
 
-        bool groundCheck = dashJumpingAllowed ? true : this.isGrounded;
-        if (groundCheck && !this.IsDashing && inputManager.Dash())
+        bool groundCheck = allowDashJumping ? true : this.isGrounded;
+        if (groundCheck && !this.IsDashing && inputManager.Dash() && canDash)
         {
             this.IsDashing = true;
             this.feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.DASH);
@@ -238,6 +240,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 this.wallJumpCount = 0;
                 this.isGrounded = true;
+                this.canDash = true;
             }
             else if (IsCollidingWithCeiling(colliderDistance))
             {
@@ -329,9 +332,13 @@ public class PlayerController2D : MonoBehaviour
 
     private IEnumerator DashCoroutine()
     {
-        velocity.y = 0;
+        this.velocity.y = 0;
         yield return new WaitForSeconds(this.dashDuration);
-        IsDashing = false;
+        this.IsDashing = false;
+        if (! this.allowDashJumping)
+        {
+            this.canDash = this.isGrounded;
+        }
     }
 
 #region Unity

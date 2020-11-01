@@ -224,7 +224,7 @@ MonoBehaviour:
   sprintingSpeed: 10
   dashDuration: 0.175
   dashSpeed: 20
-  dashJumpingAllowed: 1
+  allowDashJumping: 1
   groundAcceleration: 50
   groundDeceleration: 80
   jumpHeight: 5
