@@ -77,6 +77,8 @@ public class PlayerController2D : MonoBehaviour
             }
         }
     }
+
+    private bool canDash;
     private bool IsSprinting
     {
         get { return inputManager.Sprint(); }
@@ -120,7 +122,7 @@ public class PlayerController2D : MonoBehaviour
         float speed = IsSprinting ? this.sprintingSpeed : this.walkingSpeed;
 
         bool groundCheck = dashJumpingAllowed ? true : this.isGrounded;
-        if (groundCheck && !this.IsDashing && inputManager.Dash())
+        if (groundCheck && !this.IsDashing && inputManager.Dash() && canDash)
         {
             this.IsDashing = true;
             this.feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.DASH);
@@ -238,6 +240,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 this.wallJumpCount = 0;
                 this.isGrounded = true;
+                this.canDash = true;
             }
             else if (IsCollidingWithCeiling(colliderDistance))
             {
@@ -332,6 +335,7 @@ public class PlayerController2D : MonoBehaviour
         velocity.y = 0;
         yield return new WaitForSeconds(this.dashDuration);
         IsDashing = false;
+        canDash = isGrounded;
     }
 
 #region Unity
@@ -341,6 +345,7 @@ public class PlayerController2D : MonoBehaviour
         this.inputManager = GetComponent<PlayerInputManager>();
         this.feedbackManager = GetComponent<FeedbackManager>();
         this.orientation = Orientation.Right;
+        this.canDash = isGrounded;
     }
 
     void Update()
