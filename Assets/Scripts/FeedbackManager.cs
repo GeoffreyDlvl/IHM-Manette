@@ -8,13 +8,17 @@ public class FeedbackManager : MonoBehaviour
     {
         DASH,
         JUMP,
-        RUN
+        RUN,
+        FLIP
     }
 
     #region Particles
     [SerializeField]
-    private ParticleSystem dashParticleSystemPrefab;
-    private ParticleSystem dashParticleSystem;
+    ParticleSystem dashParticles;
+    //private ParticleSystem dashParticleSystem;
+
+    [SerializeField]
+    ParticleSystem dustParticles;
     #endregion
 
     #region SFX
@@ -23,36 +27,55 @@ public class FeedbackManager : MonoBehaviour
     #endregion
 
     AudioSource cameraAudioSource;
+    PlayerController2D playerController;
 
     private void Awake()
     {
+        playerController = GetComponent<PlayerController2D>();
+
         cameraAudioSource = Camera.main.GetComponent<AudioSource>();
 
-        dashParticleSystem = Instantiate(dashParticleSystemPrefab, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1), Quaternion.identity);
-        dashParticleSystem.transform.parent = transform;
+        ParticleSystem.MainModule dashMainModule = dashParticles.main;
+        dashMainModule.duration = playerController.GetDashDuration();
     }
 
-    public void StartFeedbackActionOf(CharacterAction action, float duration, int particlEmissionDirection)
+    public void PlayFeedback(CharacterAction action)
     {
         switch(action)
         {
             case CharacterAction.DASH:
-                if (!dashParticleSystem.isPlaying)
-                {
-                    var mainModule = dashParticleSystem.main;
-                    mainModule.duration = duration;
-                    var shapeModule = dashParticleSystem.shape;
-                    shapeModule.rotation = new Vector3(0,0, particlEmissionDirection == 1 ? 270 : 90);
-                    dashParticleSystem.Play();
-                }                    
+                CreateDashEffect();                
                 break;
             case CharacterAction.JUMP:
-                cameraAudioSource.clip = jumpSFX;
-                cameraAudioSource.volume = .3f;
-                cameraAudioSource.Play();
+                CreateJumpEffect();
+                break;
+            case CharacterAction.FLIP:
+                CreateDust();
                 break;
             default:
                 break;
         }
     }
+
+    private void CreateJumpEffect()
+    {
+        cameraAudioSource.clip = jumpSFX;
+        cameraAudioSource.volume = .3f;
+        cameraAudioSource.Play();
+
+        CreateDust();
+    }
+
+    private void CreateDashEffect()
+    {
+        ParticleSystem.VelocityOverLifetimeModule velocityModule = dashParticles.velocityOverLifetime;
+        velocityModule.x = (-1) * (int)playerController.orientation * 5;
+        dashParticles.Play();
+        CreateDust();
+    }
+
+    private void CreateDust()
+    {
+        dustParticles.Play();
+    }    
 }

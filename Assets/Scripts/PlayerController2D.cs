@@ -7,15 +7,16 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInputManager))]
 public class PlayerController2D : MonoBehaviour
 {
-#region SerializeFields
-    [SerializeField, Tooltip("Maximum walking speed in u/s.")] 
+    #region SerializeFields
+    [SerializeField, Tooltip("Maximum walking speed in u/s.")]
     float walkingSpeed = 10f;
 
     [SerializeField, Tooltip("Maximum walking speed in u/s.")]
     float sprintingSpeed = 15f;
 
     [SerializeField, Tooltip("Dash duration in seconds.")]
-    float dashDuration = .25f;
+    public float dashDuration = .25f;
+    public float GetDashDuration() { return dashDuration; }
 
     [SerializeField, Tooltip("Dash speed in u/s.")]
     float dashSpeed = 30f;
@@ -81,13 +82,16 @@ public class PlayerController2D : MonoBehaviour
         get { return inputManager.Sprint(); }
     }
 
-    enum Orientation
+    public enum Orientation
     {
         Left = -1
         , Right = 1
     }
 
-    Orientation orientation = PlayerController2D.Orientation.Right;
+    public Orientation orientation
+    {
+        get; set;
+    }
 
     // Cached variables
     BoxCollider2D boxCollider;
@@ -119,7 +123,7 @@ public class PlayerController2D : MonoBehaviour
         if (groundCheck && !this.IsDashing && inputManager.Dash())
         {
             this.IsDashing = true;
-            this.feedbackManager.StartFeedbackActionOf(FeedbackManager.CharacterAction.DASH, dashDuration, (int) this.orientation);
+            this.feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.DASH);
         }
 
         if (this.IsDashing)
@@ -139,8 +143,13 @@ public class PlayerController2D : MonoBehaviour
 
     private void UpdatePlayerOrientation(float xAxis)
     {
+        Orientation previous = orientation;
         this.orientation = xAxis == 0f ? this.orientation : (Orientation)(xAxis / Math.Abs(xAxis));
         transform.localScale = new Vector3((float) this.orientation, transform.localScale.y, transform.localScale.z);
+        if (previous != this.orientation && isGrounded)
+        {
+            feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.FLIP);
+        }
     }
 
     /// <summary>
@@ -163,7 +172,7 @@ public class PlayerController2D : MonoBehaviour
             if (this.inputManager.JumpPressed())
             {
                 this.velocity.y = Mathf.Sqrt(2 * this.jumpHeight * Mathf.Abs(this.gravity));
-                this.feedbackManager.StartFeedbackActionOf(FeedbackManager.CharacterAction.JUMP, 0f);
+                this.feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.JUMP);
             }
         }
         
@@ -331,6 +340,7 @@ public class PlayerController2D : MonoBehaviour
         this.boxCollider = GetComponent<BoxCollider2D>();
         this.inputManager = GetComponent<PlayerInputManager>();
         this.feedbackManager = GetComponent<FeedbackManager>();
+        this.orientation = Orientation.Right;
     }
 
     void Update()
