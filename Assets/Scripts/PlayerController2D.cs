@@ -247,6 +247,7 @@ public class PlayerController2D : MonoBehaviour
             else if (IsCollidingWithWall(colliderDistance))
             {
                 ApplyWallDrag();
+                AdjustXVelocity();
                 if (IsDashing)
                 {
                     this.IsDashing = false;
@@ -264,6 +265,14 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    private void AdjustXVelocity()
+    {
+        if (Mathf.Abs(this.velocity.x) > this.walkingSpeed)
+        {
+            this.velocity.x = this.walkingSpeed * (int)orientation;
+        }
+    }
+
     private bool TooCloseToTheGround()
     {
         const float boxCastEpsilon = 0.1f; // Min acceptable distance to the ground
@@ -278,23 +287,14 @@ public class PlayerController2D : MonoBehaviour
 
     private void ApplyWallDrag()
     {
+
         this.velocity.y *= 1f - this.wallDrag;
     }
 
     private void ComputeWallJumpVelocity()
     {
-        CorrectXVelocityOnWallJump();
-
         this.velocity.x = -1 * this.velocity.x * this.wallJumpBoost;
         this.velocity.y = Mathf.Sqrt(2 * this.jumpHeight * Mathf.Abs(this.gravity));
-    }
-
-    private void CorrectXVelocityOnWallJump()
-    {
-        if (Mathf.Abs(this.velocity.x) > this.walkingSpeed)
-        {
-            this.velocity.x = this.walkingSpeed * (int) orientation;
-        }
     }
 
     /// <summary>
@@ -351,6 +351,8 @@ public class PlayerController2D : MonoBehaviour
         Collider2D[] hits;
         DetectCollisions(out hits);
         ResolveCollisions(hits);
+
+        print(this.velocity.x);
     }
-#endregion
+    #endregion
 }
