@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!198 &72375059 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1903820402, guid: b05129b218949494bbb9dfa3a4dbc62f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1965663585}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &234545666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,6 +601,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1507034010540789706, guid: b05129b218949494bbb9dfa3a4dbc62f,
+        type: 3}
+      propertyPath: dust
+      value: 
+      objectReference: {fileID: 72375059}
+    - target: {fileID: 1507034010540789706, guid: b05129b218949494bbb9dfa3a4dbc62f,
+        type: 3}
+      propertyPath: dustParticles
+      value: 
+      objectReference: {fileID: 72375059}
     - target: {fileID: 6253268407511429645, guid: b05129b218949494bbb9dfa3a4dbc62f,
         type: 3}
       propertyPath: m_Name
@@ -654,11 +670,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6541192853005775679, guid: b05129b218949494bbb9dfa3a4dbc62f,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.9747628
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}

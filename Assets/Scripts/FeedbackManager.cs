@@ -8,13 +8,17 @@ public class FeedbackManager : MonoBehaviour
     {
         DASH,
         JUMP,
-        RUN
+        RUN,
+        FLIP
     }
 
     #region Particles
     [SerializeField]
     private ParticleSystem dashParticleSystemPrefab;
     private ParticleSystem dashParticleSystem;
+
+    [SerializeField]
+    ParticleSystem dustParticles;
     #endregion
 
     #region SFX
@@ -53,8 +57,16 @@ public class FeedbackManager : MonoBehaviour
                 cameraAudioSource.volume = .3f;
                 cameraAudioSource.Play();
                 break;
+            case CharacterAction.FLIP:
+                CreateDust();
+                break;
             default:
                 break;
         }
     }
+
+    private void CreateDust()
+    {
+        dustParticles.Play();
+    }    
 }

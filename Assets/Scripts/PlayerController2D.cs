@@ -143,8 +143,13 @@ public class PlayerController2D : MonoBehaviour
 
     private void UpdatePlayerOrientation(float xAxis)
     {
+        Orientation previous = orientation;
         this.orientation = xAxis == 0f ? this.orientation : (Orientation)(xAxis / Math.Abs(xAxis));
         transform.localScale = new Vector3((float) this.orientation, transform.localScale.y, transform.localScale.z);
+        if (previous != this.orientation && isGrounded)
+        {
+            feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.FLIP);
+        }
     }
 
     /// <summary>
