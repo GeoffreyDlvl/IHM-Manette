@@ -291,9 +291,9 @@ public class PlayerController2D : MonoBehaviour
 
     private void CorrectXVelocityOnWallJump()
     {
-        if (this.velocity.x >= this.walkingSpeed)
+        if (Mathf.Abs(this.velocity.x) > this.walkingSpeed)
         {
-            this.velocity.x = this.walkingSpeed;
+            this.velocity.x = this.walkingSpeed * (int) orientation;
         }
     }
 
