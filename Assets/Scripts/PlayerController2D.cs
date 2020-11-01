@@ -335,10 +335,7 @@ public class PlayerController2D : MonoBehaviour
         this.velocity.y = 0;
         yield return new WaitForSeconds(this.dashDuration);
         this.IsDashing = false;
-        if (! this.allowDashJumping)
-        {
-            this.canDash = this.isGrounded;
-        }
+        this.canDash = this.isGrounded;
     }
 
 #region Unity
