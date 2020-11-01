@@ -24,6 +24,9 @@ public class FeedbackManager : MonoBehaviour
     #region SFX
     [SerializeField]
     AudioClip jumpSFX;
+    
+    [SerializeField]
+    AudioClip dashSFX;
     #endregion
 
     AudioSource cameraAudioSource;
@@ -68,9 +71,14 @@ public class FeedbackManager : MonoBehaviour
 
     private void CreateDashEffect()
     {
+        cameraAudioSource.clip = dashSFX;
+        cameraAudioSource.volume = .3f;
+        cameraAudioSource.Play();
+
         ParticleSystem.VelocityOverLifetimeModule velocityModule = dashParticles.velocityOverLifetime;
         velocityModule.x = (-1) * (int)playerController.orientation * 5;
         dashParticles.Play();
+        
         CreateDust();
     }
 
