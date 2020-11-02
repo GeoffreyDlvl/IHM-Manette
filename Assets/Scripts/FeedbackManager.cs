@@ -7,7 +7,8 @@ public class FeedbackManager : MonoBehaviour
         DASH,
         JUMP,
         RUN,
-        FLIP
+        FLIP,
+        DIE
     }
 
     #region Particles
@@ -24,6 +25,10 @@ public class FeedbackManager : MonoBehaviour
     
     [SerializeField]
     AudioClip dashSFX;
+
+    [SerializeField]
+    AudioClip dieSFX;
+
     #endregion
 
     AudioSource cameraAudioSource;
@@ -51,6 +56,9 @@ public class FeedbackManager : MonoBehaviour
                 break;
             case CharacterAction.FLIP:
                 CreateDust();
+                break;
+            case CharacterAction.DIE:
+                CreateDieAction();
                 break;
             default:
                 break;
@@ -85,5 +93,11 @@ public class FeedbackManager : MonoBehaviour
     private void CreateDust()
     {
         dustParticles.Play();
+    }
+
+    private void CreateDieAction() {
+        cameraAudioSource.clip = dieSFX;
+        cameraAudioSource.volume = .3f;
+        cameraAudioSource.Play();
     }
 }
