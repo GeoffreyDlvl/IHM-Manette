@@ -765,38 +765,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: playerColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: playerColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: playerColor.g
-      value: 0.0141509175
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: playerColor.b
-      value: 0.81391275
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: noMoreWallJumpPlayerColor.r
-      value: 0.6415094
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: noMoreWallJumpPlayerColor.g
-      value: 0.20879316
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: noMoreWallJumpPlayerColor.b
-      value: 0.5596443
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965663587, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
-      propertyPath: noMoreWallJumpPlayerColor.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6253268407511429645, guid: b05129b218949494bbb9dfa3a4dbc62f,
         type: 3}
       propertyPath: m_Name
