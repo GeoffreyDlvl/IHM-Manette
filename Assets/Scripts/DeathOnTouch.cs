@@ -15,6 +15,11 @@ public class DeathOnTouch : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        print("death");
         if (other.gameObject.CompareTag("Player"))
         {
             respawnManager.Respawn();
