@@ -209,16 +209,16 @@ MonoBehaviour:
   walkingSpeed: 5
   sprintingSpeed: 10
   dashDuration: 0.175
-  dashSpeed: 20
+  dashSpeed: 15
   allowDashJumping: 1
-  groundAcceleration: 50
+  groundAcceleration: 30
   groundDeceleration: 80
-  jumpHeight: 5
+  jumpHeight: 3.5
   gravity: -35
-  airAcceleration: 30
+  airAcceleration: 15
   wallDrag: 0.05
   wallJumpBoost: 2
-  maxWallJumps: 2
+  maxWallJumps: 5
 --- !u!50 &1246237458
 Rigidbody2D:
   serializedVersion: 4
@@ -361,6 +361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DashPS
+      objectReference: {fileID: 0}
+    - target: {fileID: 3316666422085722390, guid: 9b2b2d9a58db75c4c9fd7c42094f27ff,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3316666422085722391, guid: 9b2b2d9a58db75c4c9fd7c42094f27ff,
         type: 3}

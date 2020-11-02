@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2834027941642788745}
   - component: {fileID: -2015078413984683367}
   - component: {fileID: 3764377314040126228}
+  - component: {fileID: 356791590}
   m_Layer: 0
   m_Name: Plateform_03
   m_TagString: Untagged
@@ -125,3 +126,24 @@ MonoBehaviour:
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
+--- !u!50 &356791590
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2363719482989959868}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

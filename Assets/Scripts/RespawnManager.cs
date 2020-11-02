@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RespawnManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    Transform respawnPosition;
+
+    GameObject player;
+
+    private void Awake()
     {
-        
+        player = FindObjectOfType<PlayerController2D>().gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Respawn()
     {
-        
+        player.transform.position = respawnPosition.position;
     }
 }
