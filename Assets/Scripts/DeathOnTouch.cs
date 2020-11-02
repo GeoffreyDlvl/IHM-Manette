@@ -17,6 +17,8 @@ public class DeathOnTouch : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            FeedbackManager feedback = FindObjectOfType<FeedbackManager>();
+            feedback.PlayFeedback(FeedbackManager.CharacterAction.DIE);
             respawnManager.Respawn();
         }
     }
