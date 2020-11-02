@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(PlayerInputManager))]
 public class PlayerController2D : MonoBehaviour
 {
     #region SerializeFields
@@ -56,7 +55,11 @@ public class PlayerController2D : MonoBehaviour
     Vector2 velocity;
     IEnumerator dashCoroutine = null;
     int wallJumpCount = 0;
-    bool isGrounded;
+    public bool IsGrounded
+    {
+        get; private set;
+    }
+
     private bool IsDashing
     {
         get
@@ -97,7 +100,7 @@ public class PlayerController2D : MonoBehaviour
 
     // Cached variables
     BoxCollider2D boxCollider;
-    PlayerInputManager inputManager;
+    InputManager inputManager;
 
     private void ComputeVelocity()
     {
@@ -116,12 +119,12 @@ public class PlayerController2D : MonoBehaviour
         float xAxis = inputManager.HorizontalAxis();
         UpdatePlayerOrientation(xAxis);
 
-        float acceleration = this.isGrounded ? this.groundAcceleration : this.airAcceleration;
-        float deceleration = this.isGrounded ? this.groundDeceleration : 0;
+        float acceleration = this.IsGrounded ? this.groundAcceleration : this.airAcceleration;
+        float deceleration = this.IsGrounded ? this.groundDeceleration : 0;
 
         float speed = IsSprinting ? this.sprintingSpeed : this.walkingSpeed;
 
-        bool groundCheck = allowDashJumping ? true : this.isGrounded;
+        bool groundCheck = allowDashJumping ? true : this.IsGrounded;
         if (groundCheck && !this.IsDashing && inputManager.Dash() && canDash)
         {
             this.IsDashing = true;
@@ -148,7 +151,7 @@ public class PlayerController2D : MonoBehaviour
         Orientation previous = orientation;
         this.orientation = xAxis == 0f ? this.orientation : (Orientation)(xAxis / Math.Abs(xAxis));
         transform.localScale = new Vector3((float) this.orientation, transform.localScale.y, transform.localScale.z);
-        if (previous != this.orientation && isGrounded)
+        if (previous != this.orientation && IsGrounded)
         {
             feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.FLIP);
         }
@@ -167,7 +170,7 @@ public class PlayerController2D : MonoBehaviour
     /// </summary>
     private void ComputeYVelocity()
     {
-        if (this.isGrounded)
+        if (this.IsGrounded)
         {
             this.velocity.y = 0;
 
@@ -214,7 +217,7 @@ public class PlayerController2D : MonoBehaviour
     /// <param name="hits">The colliders in contact with the player.</param>
     private void ResolveCollisions(Collider2D[] hits)
     {
-        this.isGrounded = false;
+        this.IsGrounded = false;
         foreach (Collider2D hit in hits)
         {
             if (ShouldResolveCollisionWith(hit))
@@ -239,7 +242,7 @@ public class PlayerController2D : MonoBehaviour
             if (IsCollidingWithGround(colliderDistance))
             {
                 this.wallJumpCount = 0;
-                this.isGrounded = true;
+                this.IsGrounded = true;
                 this.canDash = true;
             }
             else if (IsCollidingWithCeiling(colliderDistance))
@@ -335,15 +338,15 @@ public class PlayerController2D : MonoBehaviour
         this.velocity.y = 0;
         yield return new WaitForSeconds(this.dashDuration);
         this.IsDashing = false;
-        this.canDash = this.isGrounded;
+        this.canDash = this.IsGrounded;
     }
 
 #region Unity
     void Awake()
     {
         this.boxCollider = GetComponent<BoxCollider2D>();
-        this.inputManager = GetComponent<PlayerInputManager>();
-        this.feedbackManager = GetComponent<FeedbackManager>();
+        this.inputManager = FindObjectOfType<InputManager>();
+        this.feedbackManager = FindObjectOfType<FeedbackManager>();
         this.orientation = Orientation.Right;
     }
 
@@ -355,8 +358,6 @@ public class PlayerController2D : MonoBehaviour
         Collider2D[] hits;
         DetectCollisions(out hits);
         ResolveCollisions(hits);
-
-        print(this.velocity.x);
     }
     #endregion
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FeedbackManager : MonoBehaviour
 {
@@ -15,7 +13,6 @@ public class FeedbackManager : MonoBehaviour
     #region Particles
     [SerializeField]
     ParticleSystem dashParticles;
-    //private ParticleSystem dashParticleSystem;
 
     [SerializeField]
     ParticleSystem dustParticles;
@@ -34,7 +31,7 @@ public class FeedbackManager : MonoBehaviour
 
     private void Awake()
     {
-        playerController = GetComponent<PlayerController2D>();
+        playerController = FindObjectOfType<PlayerController2D>();
 
         cameraAudioSource = Camera.main.GetComponent<AudioSource>();
 
@@ -79,11 +76,14 @@ public class FeedbackManager : MonoBehaviour
         velocityModule.x = (-1) * (int)playerController.orientation * 5;
         dashParticles.Play();
         
-        CreateDust();
+        if (playerController.IsGrounded)
+        {
+            CreateDust();
+        }
     }
 
     private void CreateDust()
     {
         dustParticles.Play();
-    }    
+    }
 }
