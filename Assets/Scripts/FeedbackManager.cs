@@ -76,7 +76,10 @@ public class FeedbackManager : MonoBehaviour
         velocityModule.x = (-1) * (int)playerController.orientation * 5;
         dashParticles.Play();
         
-        CreateDust();
+        if (playerController.IsGrounded)
+        {
+            CreateDust();
+        }
     }
 
     private void CreateDust()
