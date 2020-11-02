@@ -361,7 +361,19 @@ public class PlayerController2D : MonoBehaviour
         this.canDash = this.IsGrounded;
     }
 
-#region Unity
+    private void UpdateRenderer()
+    {
+        if (this.wallJumpCount >= this.maxWallJumps)
+        {
+            GetComponent<SpriteRenderer>().color = this.noMoreWallJumpPlayerColor;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = this.playerColor;
+        }
+    }
+
+    #region Unity
     void Awake()
     {
         this.boxCollider = GetComponent<BoxCollider2D>();
@@ -379,18 +391,6 @@ public class PlayerController2D : MonoBehaviour
         Collider2D[] hits;
         DetectCollisions(out hits);
         ResolveCollisions(hits);
-    }
-
-    private void UpdateRenderer()
-    {
-        if (this.wallJumpCount >= this.maxWallJumps)
-        {
-            GetComponent<SpriteRenderer>().color = this.noMoreWallJumpPlayerColor;
-        } 
-        else 
-        {
-            GetComponent<SpriteRenderer>().color = this.playerColor;
-        }
     }
     #endregion
 }
