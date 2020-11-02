@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-internal class PlayerInputManager : MonoBehaviour
+internal class InputManager : MonoBehaviour
 {
     const string JoystickXAxisName = "Joystick X";
     const string JoystickYAxisName = "Joystick Y";

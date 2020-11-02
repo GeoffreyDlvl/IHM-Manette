@@ -4,7 +4,6 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(PlayerInputManager))]
 public class PlayerController2D : MonoBehaviour
 {
     #region SerializeFields
@@ -97,7 +96,7 @@ public class PlayerController2D : MonoBehaviour
 
     // Cached variables
     BoxCollider2D boxCollider;
-    PlayerInputManager inputManager;
+    InputManager inputManager;
 
     private void ComputeVelocity()
     {
@@ -342,8 +341,8 @@ public class PlayerController2D : MonoBehaviour
     void Awake()
     {
         this.boxCollider = GetComponent<BoxCollider2D>();
-        this.inputManager = GetComponent<PlayerInputManager>();
-        this.feedbackManager = GetComponent<FeedbackManager>();
+        this.inputManager = FindObjectOfType<InputManager>();
+        this.feedbackManager = FindObjectOfType<FeedbackManager>();
         this.orientation = Orientation.Right;
     }
 
@@ -355,8 +354,6 @@ public class PlayerController2D : MonoBehaviour
         Collider2D[] hits;
         DetectCollisions(out hits);
         ResolveCollisions(hits);
-
-        print(this.velocity.x);
     }
     #endregion
 }

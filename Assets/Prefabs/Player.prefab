@@ -92,10 +92,8 @@ GameObject:
   - component: {fileID: 6541192853005775679}
   - component: {fileID: 3203781062079620671}
   - component: {fileID: 1965663589}
-  - component: {fileID: 1965663588}
   - component: {fileID: 1965663587}
   - component: {fileID: 1246237458}
-  - component: {fileID: 1507034010540789706}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -196,18 +194,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1965663588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6253268407511429645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f567152f31b256b4baf16cf5468db9e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1965663587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,21 +240,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1507034010540789706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6253268407511429645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fb75ce0b52ca794d97f67aef4431eea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashParticles: {fileID: 3316666421940821606}
-  dustParticles: {fileID: 1903820402}
-  jumpSFX: {fileID: 8300000, guid: c1d8e22e7545a884ba2ac0df0e010953, type: 3}
 --- !u!1001 &417152878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,12 +390,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 417152878}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &3316666421940821606 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3316666422085722376, guid: 9b2b2d9a58db75c4c9fd7c42094f27ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 417152878}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &180981183053556369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -502,12 +467,6 @@ PrefabInstance:
 --- !u!4 &1903820400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 180981182259139809, guid: 232cab17da36e09469f8724670d9a46b,
-    type: 3}
-  m_PrefabInstance: {fileID: 180981183053556369}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1903820402 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 180981182259139811, guid: 232cab17da36e09469f8724670d9a46b,
     type: 3}
   m_PrefabInstance: {fileID: 180981183053556369}
   m_PrefabAsset: {fileID: 0}
