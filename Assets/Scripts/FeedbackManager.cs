@@ -9,6 +9,7 @@ public class FeedbackManager : MonoBehaviour
         JUMP,
         RUN,
         FLIP,
+        DIE,
         WALLDRAG
     }
 
@@ -26,6 +27,9 @@ public class FeedbackManager : MonoBehaviour
     
     [SerializeField]
     AudioClip dashSFX;
+
+    [SerializeField]
+    AudioClip dieSFX;
 
     [SerializeField]
     AudioClip dragSFX;
@@ -56,6 +60,9 @@ public class FeedbackManager : MonoBehaviour
                 break;
             case CharacterAction.FLIP:
                 CreateDust();
+                break;
+            case CharacterAction.DIE:
+                CreateDieAction();
                 break;
             case CharacterAction.WALLDRAG:
                 CreateWallDragEffect();
@@ -106,5 +113,11 @@ public class FeedbackManager : MonoBehaviour
     private void CreateDust()
     {
         dustParticles.Play();
+    }
+
+    private void CreateDieAction() {
+        cameraAudioSource.clip = dieSFX;
+        cameraAudioSource.volume = .3f;
+        cameraAudioSource.Play();
     }
 }

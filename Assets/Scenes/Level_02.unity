@@ -1649,6 +1649,11 @@ PrefabInstance:
       propertyPath: dustParticles
       value: 
       objectReference: {fileID: 1309707629}
+    - target: {fileID: 658519485211650129, guid: fb6fe7894711b0f4282bab0971a469c0,
+        type: 3}
+      propertyPath: dieSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 372eec6643382b64abd226e67a37ab59, type: 3}
     - target: {fileID: 658519485211650131, guid: fb6fe7894711b0f4282bab0971a469c0,
         type: 3}
       propertyPath: m_Name
