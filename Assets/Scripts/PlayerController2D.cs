@@ -46,13 +46,30 @@ public class PlayerController2D : MonoBehaviour
     
     [SerializeField, Min(0f), Tooltip("Maximum number of consecutive walljumps allowed. Set to zero to disable this feature.")]
     int maxWallJumps = 2;
+
+    [SerializeField]
+    Color playerColor;
+    [SerializeField]
+    Color noMoreWallJumpPlayerColor;
+
     #endregion
 
-#region Feedbacks 
+    #region Feedbacks 
     private FeedbackManager feedbackManager;
 #endregion
 
-    Vector2 velocity;
+    private Vector2 velocity;
+    public Vector2 Velocity
+    {
+        get
+        {
+            return this.velocity;
+        }
+        set
+        {
+            this.velocity = value;
+        }
+    }
     IEnumerator dashCoroutine = null;
     int wallJumpCount = 0;
     public bool IsGrounded
@@ -252,7 +269,10 @@ public class PlayerController2D : MonoBehaviour
             }
             else if (IsCollidingWithWall(colliderDistance))
             {
-                ApplyWallDrag();
+                if (velocity.y < -2f)
+                {
+                    ApplyWallDrag();
+                }
                 AdjustXVelocity();
                 if (IsDashing)
                 {
@@ -293,8 +313,8 @@ public class PlayerController2D : MonoBehaviour
 
     private void ApplyWallDrag()
     {
-
         this.velocity.y *= 1f - this.wallDrag;
+        feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.WALLDRAG);
     }
 
     private void ComputeWallJumpVelocity()
@@ -354,10 +374,23 @@ public class PlayerController2D : MonoBehaviour
     {
         ComputeVelocity();
         Move();
+        UpdateRenderer();
 
         Collider2D[] hits;
         DetectCollisions(out hits);
         ResolveCollisions(hits);
+    }
+
+    private void UpdateRenderer()
+    {
+        if (this.wallJumpCount >= this.maxWallJumps)
+        {
+            GetComponent<SpriteRenderer>().color = this.noMoreWallJumpPlayerColor;
+        } 
+        else 
+        {
+            GetComponent<SpriteRenderer>().color = this.playerColor;
+        }
     }
     #endregion
 }

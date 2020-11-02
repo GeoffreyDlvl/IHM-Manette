@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class FeedbackManager : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class FeedbackManager : MonoBehaviour
         JUMP,
         RUN,
         FLIP,
-        DIE
+        DIE,
+        WALLDRAG
     }
 
     #region Particles
@@ -29,6 +31,8 @@ public class FeedbackManager : MonoBehaviour
     [SerializeField]
     AudioClip dieSFX;
 
+    [SerializeField]
+    AudioClip dragSFX;
     #endregion
 
     AudioSource cameraAudioSource;
@@ -60,8 +64,24 @@ public class FeedbackManager : MonoBehaviour
             case CharacterAction.DIE:
                 CreateDieAction();
                 break;
+            case CharacterAction.WALLDRAG:
+                CreateWallDragEffect();
+                break;
             default:
                 break;
+        }
+    }
+
+    private void CreateWallDragEffect()
+    {
+        if (! cameraAudioSource.isPlaying)
+        {
+            cameraAudioSource.clip = dragSFX;
+            cameraAudioSource.Play();
+        }
+        if (playerController.Velocity.y > 0f)
+        {
+            cameraAudioSource.Stop();
         }
     }
 

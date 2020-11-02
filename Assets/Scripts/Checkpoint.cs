@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    [SerializeField]
+    AudioClip checkpointSFX;
+
     RespawnManager respawnManager;
+    bool activated = false;
 
     private void Awake()
     {
@@ -15,8 +15,21 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        UpdateLightRenderer();
-        UpdateRespawnPosition();
+        if (!activated)
+        {
+            UpdateLightRenderer();
+            UpdateRespawnPosition();
+            PlayCheckpointSFX();
+            activated = true;  
+        }
+    }
+
+    private void PlayCheckpointSFX()
+    {
+        AudioSource cameraAudioSource;
+        cameraAudioSource = Camera.main.GetComponent<AudioSource>();
+        cameraAudioSource.clip = checkpointSFX;
+        cameraAudioSource.Play();
     }
 
     private void UpdateRespawnPosition()
