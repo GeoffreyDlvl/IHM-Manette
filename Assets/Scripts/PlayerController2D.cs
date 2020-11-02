@@ -52,7 +52,18 @@ public class PlayerController2D : MonoBehaviour
     private FeedbackManager feedbackManager;
 #endregion
 
-    Vector2 velocity;
+    private Vector2 velocity;
+    public Vector2 Velocity
+    {
+        get
+        {
+            return this.velocity;
+        }
+        set
+        {
+            this.velocity = value;
+        }
+    }
     IEnumerator dashCoroutine = null;
     int wallJumpCount = 0;
     public bool IsGrounded
@@ -252,7 +263,10 @@ public class PlayerController2D : MonoBehaviour
             }
             else if (IsCollidingWithWall(colliderDistance))
             {
-                ApplyWallDrag();
+                if (velocity.y < -2f)
+                {
+                    ApplyWallDrag();
+                }
                 AdjustXVelocity();
                 if (IsDashing)
                 {
@@ -293,8 +307,8 @@ public class PlayerController2D : MonoBehaviour
 
     private void ApplyWallDrag()
     {
-
         this.velocity.y *= 1f - this.wallDrag;
+        feedbackManager.PlayFeedback(FeedbackManager.CharacterAction.WALLDRAG);
     }
 
     private void ComputeWallJumpVelocity()

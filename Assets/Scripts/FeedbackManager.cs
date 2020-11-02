@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class FeedbackManager : MonoBehaviour
 {
@@ -7,7 +8,8 @@ public class FeedbackManager : MonoBehaviour
         DASH,
         JUMP,
         RUN,
-        FLIP
+        FLIP,
+        WALLDRAG
     }
 
     #region Particles
@@ -24,6 +26,9 @@ public class FeedbackManager : MonoBehaviour
     
     [SerializeField]
     AudioClip dashSFX;
+
+    [SerializeField]
+    AudioClip dragSFX;
     #endregion
 
     AudioSource cameraAudioSource;
@@ -52,8 +57,24 @@ public class FeedbackManager : MonoBehaviour
             case CharacterAction.FLIP:
                 CreateDust();
                 break;
+            case CharacterAction.WALLDRAG:
+                CreateWallDragEffect();
+                break;
             default:
                 break;
+        }
+    }
+
+    private void CreateWallDragEffect()
+    {
+        if (! cameraAudioSource.isPlaying)
+        {
+            cameraAudioSource.clip = dragSFX;
+            cameraAudioSource.Play();
+        }
+        if (playerController.Velocity.y > 0f)
+        {
+            cameraAudioSource.Stop();
         }
     }
 
