@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace304c63fe5a3344b33d18610c2515b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpointSFX: {fileID: 8300000, guid: 9d6426b695114504b96167a71e4d9d87, type: 3}
 --- !u!61 &7655217643927048892
 BoxCollider2D:
   m_ObjectHideFlags: 0
