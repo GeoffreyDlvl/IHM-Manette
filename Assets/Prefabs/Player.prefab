@@ -219,6 +219,8 @@ MonoBehaviour:
   wallDrag: 0.05
   wallJumpBoost: 2
   maxWallJumps: 2
+  playerColor: {r: 1, g: 0.0141509175, b: 0.81391275, a: 1}
+  noMoreWallJumpPlayerColor: {r: 0.6415094, g: 0.20879316, b: 0.5596443, a: 1}
 --- !u!50 &1246237458
 Rigidbody2D:
   serializedVersion: 4
