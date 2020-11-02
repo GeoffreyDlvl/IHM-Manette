@@ -46,9 +46,15 @@ public class PlayerController2D : MonoBehaviour
     
     [SerializeField, Min(0f), Tooltip("Maximum number of consecutive walljumps allowed. Set to zero to disable this feature.")]
     int maxWallJumps = 2;
+
+    [SerializeField]
+    Color playerColor;
+    [SerializeField]
+    Color noMoreWallJumpPlayerColor;
+
     #endregion
 
-#region Feedbacks 
+    #region Feedbacks 
     private FeedbackManager feedbackManager;
 #endregion
 
@@ -368,10 +374,23 @@ public class PlayerController2D : MonoBehaviour
     {
         ComputeVelocity();
         Move();
+        UpdateRenderer();
 
         Collider2D[] hits;
         DetectCollisions(out hits);
         ResolveCollisions(hits);
+    }
+
+    private void UpdateRenderer()
+    {
+        if (this.wallJumpCount >= this.maxWallJumps)
+        {
+            GetComponent<SpriteRenderer>().color = this.noMoreWallJumpPlayerColor;
+        } 
+        else 
+        {
+            GetComponent<SpriteRenderer>().color = this.playerColor;
+        }
     }
     #endregion
 }

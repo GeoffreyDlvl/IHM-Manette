@@ -218,7 +218,7 @@ MonoBehaviour:
   airAcceleration: 15
   wallDrag: 0.05
   wallJumpBoost: 2
-  maxWallJumps: 7
+  maxWallJumps: 2
 --- !u!50 &1246237458
 Rigidbody2D:
   serializedVersion: 4
