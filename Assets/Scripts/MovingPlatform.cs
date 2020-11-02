@@ -18,28 +18,6 @@ public class MovingPlatform : MonoBehaviour
     void Update()
     {
         Move();
-
-        UnparentPlayerIfRequired();
-    }
-
-    private void UnparentPlayerIfRequired()
-    {
-        PlayerController2D playerController = GetComponentInChildren<PlayerController2D>();
-        if (playerController == null)
-            return;
-
-        Transform playerTransform = playerController.transform;
-
-        RaycastHit2D hit = Physics2D.BoxCast(playerTransform.position, new Vector2(1,1), 0f, Vector2.down);
-
-        if (hit.distance > .2f)
-        {
-            playerTransform.SetParent(null);
-            foreach(Transform child in transform)
-            {
-                Destroy(child.gameObject);
-            }
-        }
     }
 
     private void Move()
@@ -61,14 +39,25 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (transform.childCount == 0)
         {
             GameObject Empty_1x1 = new GameObject();
             Empty_1x1.name = "Empty_1x1";
             Empty_1x1.transform.parent = transform;
-            other.collider.transform.SetParent(Empty_1x1.transform);
+            other.gameObject.transform.SetParent(Empty_1x1.transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        PlayerController2D playerController = GetComponentInChildren<PlayerController2D>();
+        Transform playerTransform = playerController.transform;
+        playerTransform.SetParent(null);
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 
