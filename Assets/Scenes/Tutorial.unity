@@ -1834,6 +1834,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1725310188}
     m_Modifications:
+    - target: {fileID: 356791590, guid: 4e7ca1969756a5e4e94703701a187dd6, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1054857378583220487, guid: 4e7ca1969756a5e4e94703701a187dd6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1904,6 +1908,16 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 1467888178}
+    - target: {fileID: 8019308429287458180, guid: 4e7ca1969756a5e4e94703701a187dd6,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0004964173
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019308429287458180, guid: 4e7ca1969756a5e4e94703701a187dd6,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.98312336
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e7ca1969756a5e4e94703701a187dd6, type: 3}
 --- !u!1001 &1319200508
@@ -1993,6 +2007,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1246237458, guid: b05129b218949494bbb9dfa3a4dbc62f, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6253268407511429645, guid: b05129b218949494bbb9dfa3a4dbc62f,
         type: 3}
       propertyPath: m_Name
@@ -2001,12 +2019,12 @@ PrefabInstance:
     - target: {fileID: 6541192853005775679, guid: b05129b218949494bbb9dfa3a4dbc62f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.04
+      value: 9.85
       objectReference: {fileID: 0}
     - target: {fileID: 6541192853005775679, guid: b05129b218949494bbb9dfa3a4dbc62f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.43
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6541192853005775679, guid: b05129b218949494bbb9dfa3a4dbc62f,
         type: 3}
