@@ -2016,6 +2016,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.4645774
       objectReference: {fileID: 0}
+    - target: {fileID: 2294776371684131463, guid: 6e0d63ebbc685fb4aa33464eb3ba661a,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3939380628220168255, guid: 6e0d63ebbc685fb4aa33464eb3ba661a,
         type: 3}
       propertyPath: m_Name
