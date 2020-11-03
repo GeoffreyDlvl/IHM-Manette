@@ -15,4 +15,9 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(++currentSceneIndex);
     }
+
+    public void LoadScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
 }
