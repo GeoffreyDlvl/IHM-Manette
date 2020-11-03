@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +14,15 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(++currentSceneIndex);
+        if(currentSceneIndex+1 >= SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(0);
+            currentSceneIndex = 0;           
+        }
+        else
+        {
+            SceneManager.LoadScene(++currentSceneIndex);
+        }
     }
 
     public void LoadScene(int index)

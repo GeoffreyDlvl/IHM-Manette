@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 5
-  sprintingSpeed: 10
+  sprintingSpeed: 12
   dashDuration: 0.175
   dashSpeed: 15
   allowDashJumping: 1
