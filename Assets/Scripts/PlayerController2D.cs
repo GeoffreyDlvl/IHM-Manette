@@ -373,6 +373,13 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    public void ResetPlayer()
+    {
+        velocity = new Vector2();
+        if (IsDashing)
+            IsDashing = false;
+    }
+
     #region Unity
     void Awake()
     {

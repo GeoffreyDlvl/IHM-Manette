@@ -26,6 +26,7 @@ public class RespawnManager : MonoBehaviour
     {
         player.SetActive(false);
         player.transform.position = respawnPosition.position;
+        player.GetComponent<PlayerController2D>().ResetPlayer();
         yield return new WaitForSeconds(respawnDelay);
         player.SetActive(true);
     }
