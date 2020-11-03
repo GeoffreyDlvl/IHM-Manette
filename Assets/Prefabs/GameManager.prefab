@@ -66,6 +66,7 @@ MonoBehaviour:
   dashSFX: {fileID: 8300000, guid: e741c942b5fa85b4e8b53bcb549a8608, type: 3}
   dieSFX: {fileID: 8300000, guid: 372eec6643382b64abd226e67a37ab59, type: 3}
   dragSFX: {fileID: 8300000, guid: 1467d00a8183b2c4f975c9ff4b948779, type: 3}
+  winSFX: {fileID: 8300000, guid: 8a49506c0f241fc48bb1ce74485ea6c8, type: 3}
 --- !u!114 &658519485211650128
 MonoBehaviour:
   m_ObjectHideFlags: 0

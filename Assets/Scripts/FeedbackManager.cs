@@ -10,7 +10,8 @@ public class FeedbackManager : MonoBehaviour
         RUN,
         FLIP,
         DIE,
-        WALLDRAG
+        WALLDRAG,
+        WIN
     }
 
     #region Particles
@@ -33,6 +34,10 @@ public class FeedbackManager : MonoBehaviour
 
     [SerializeField]
     AudioClip dragSFX;
+
+
+    [SerializeField]
+    AudioClip winSFX;
     #endregion
 
     AudioSource cameraAudioSource;
@@ -66,6 +71,9 @@ public class FeedbackManager : MonoBehaviour
                 break;
             case CharacterAction.WALLDRAG:
                 CreateWallDragEffect();
+                break;
+            case CharacterAction.WIN:
+                createWinAction();
                 break;
             default:
                 break;
@@ -117,6 +125,13 @@ public class FeedbackManager : MonoBehaviour
 
     private void CreateDieAction() {
         cameraAudioSource.clip = dieSFX;
+        cameraAudioSource.volume = .3f;
+        cameraAudioSource.Play();
+    }
+
+    private void createWinAction()
+    {
+        cameraAudioSource.clip = winSFX;
         cameraAudioSource.volume = .3f;
         cameraAudioSource.Play();
     }
